@@ -82,27 +82,7 @@ Lets build and push the image of our frontend and backend testing them with:
 - docker buildx build --platform linux/amd64,linux/arm64 -t your-dockerhub-username/your-image-name:tag . --push
 and then docker run
 
-### Kubernetes
-
-4. You have to set the image used in the web-app.yaml to your-dockerhub-username/your-image-name:tag and also
- set the env linked to your mongo-secret and mongo-config, where you will have to indicate your credentials in base64
- Also Delete the .env file, just in case it interferes with process.env
-
-5. Test everything with:
-- minikube start --driver=docker
-a. kubectl apply -f mongo-secret.yaml 
-b. kubectl apply -f mongo-config.yaml 
-c. kubectl apply -f mongo/
-d. kubectl apply -f node/ 
-
-Now we have to export that service to our machine for testing it:
-- minikube service node-service 
-
-After changing smth: 
-- kubectl logs -l app=node-server
-- kubectl delete configmap --all y asi con el resto
-
-## TLS/HTTPS To Keycloak ##
+## TLS/HTTPS ##
 ### Certf x.509 for HTTPS
 TODO: see how apply X.509 to digital firm
 
@@ -111,7 +91,10 @@ openssl req -x509 -out localhostcert.pem -keyout localhostkey.pem \
   -subj '/CN=localhost' -extensions EXT -config <( \
    printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
 
-when loading the secured page: https://localhost:8043, we will have to set our local certificate as trusted
+when loading the secured page: https://localhost:443, we will have to set our local certificate as trusted
+
+### It is suggested to include the generated cert in your system, in MacOS:
+keychain access->File->import cert->select the cert in keychain access/login and set always trusr
 
 ## Notes about Encryption and secure connections
 
