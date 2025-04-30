@@ -1,9 +1,9 @@
 // const service = process.env.BACKEND_URL;
 // const fullUri = `http://${service}:3500/api/tasks`;
 
-export const getTasks = async (token) => {
+export const getTasks = async (token, backend) => {
   try {
-    const response = await fetch('/api/tasks/', {
+    const response = await fetch(`${backend}/tasks/`, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: token,
@@ -20,9 +20,9 @@ export const getTasks = async (token) => {
   }
 };
 
-export const createTask = async (task, token) => {
+export const createTask = async (task, token, backend) => {
   try {
-    const response = await fetch('/api/tasks/', {
+    const response = await fetch(`${backend}/tasks/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -40,9 +40,9 @@ export const createTask = async (task, token) => {
   }
 };
 
-export const deleteTask = async (id, token) => {
+export const deleteTask = async (id, token, backend) => {
   try {
-    const response = await fetch(`/api/tasks/${id}`, {
+    const response = await fetch(`${backend}/tasks/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -59,9 +59,9 @@ export const deleteTask = async (id, token) => {
   }
 };
 
-export const updateTask = async (id, updatedField, token) => {
+export const updateTask = async (id, updatedField, token, backend) => {
   try {
-    const response = await fetch(`/api/tasks/${id}`, {
+    const response = await fetch(`${backend}/tasks/${id}`, {
       method: 'PATCH',
       headers: { 
         'Content-Type': 'application/json',

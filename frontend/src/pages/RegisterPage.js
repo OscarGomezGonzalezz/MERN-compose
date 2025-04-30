@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { registerUser } from "../services/authService";
 import { Link } from "react-router-dom";
 
-function RegisterPage() {
+function RegisterPage({backend}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -29,9 +29,9 @@ function RegisterPage() {
     }
 
     try {
-      const data = await registerUser(username, password);
+      const data = await registerUser(username, password, backend);
       localStorage.setItem("token", data.token);
-      console.log("token", data.token);
+      //console.log("token", data.token);
       navigate("/tasks"); // Redirect to task app after successful registration
     } catch (error) {
       setError("Username already exists");

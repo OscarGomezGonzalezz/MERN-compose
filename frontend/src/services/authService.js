@@ -3,9 +3,9 @@
 //const service = process.env.BACKEND_URL;
 //const fullUri = `http://${service}:3500/api/auth`;
 
-export const registerUser = async (username, password) => {
+export const registerUser = async (username, password, backend) => {
   try {
-    const response = await fetch('/api/auth/register', {
+    const response = await fetch(`${backend}/auth/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,9 +24,9 @@ export const registerUser = async (username, password) => {
   }
 };
 
-export const loginUser = async (username, password) => {
+export const loginUser = async (username, password, backend) => {
   try {
-    const response = await fetch('/api/auth/register', {
+    const response = await fetch(`${backend}/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

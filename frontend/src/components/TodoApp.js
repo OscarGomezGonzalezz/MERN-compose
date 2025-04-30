@@ -2,20 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { getTasks, createTask, deleteTask, updateTask} from '../services/taskService';
 import '../App.css';
 
-function TodoApp() {
+function TodoApp({backend}) {
   const [todos, setTodos] = useState([]);
   const [task, setTask] = useState('');
-
+  console.log("backend", backend);
 
   const token = localStorage.getItem("token");
   // Cargar los TODOs cuando se monta el componente
   useEffect(() => {
     fetchTodos();
-  }, []);
+  }, []);//ignore warning as a loop will be produced otherway
 
   const fetchTodos = async () => {
     try {
-      const todosData = await getTasks(token);
+      const todosData = await getTasks(token, backend);
       setTodos(todosData.slice(0, 9)); // Limit to 9 tasks for correct displaying purposes
     } catch (error) {
       console.error("Error loading todos", error);
@@ -25,7 +25,7 @@ function TodoApp() {
   const handleAddTask = async () => {
     if (task.trim()) {
       try {
-        await createTask(task, token);
+        await createTask(task, token, backend);
         setTask(''); // Clean input
         fetchTodos(); // Reload tasks
       } catch (error) {
@@ -36,7 +36,7 @@ function TodoApp() {
 
   const handleDeleteTask = async (id) => {
     try {
-      await deleteTask(id, token);
+      await deleteTask(id, token, backend);
       fetchTodos(); // Reload tasks
     } catch (error) {
       console.error("Error deleting task", error);
@@ -45,7 +45,7 @@ function TodoApp() {
 
   const handleUpdateTask = async (id) => {
     try {
-      await updateTask(id, {done: true}, token);//Mark task as done
+      await updateTask(id, {done: true}, token, backend);//Mark task as done
       fetchTodos(); // Reload tasks
     } catch (error) {
       console.error("Error updating task", error);
@@ -55,7 +55,7 @@ function TodoApp() {
   return (
     <div className="App">
       <h1>Todo List</h1>
-      <div class="add-task">
+      <div className="add-task">
         <input
           type="text"
           value={task}

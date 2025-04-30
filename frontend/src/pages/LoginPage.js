@@ -4,11 +4,12 @@ import { loginUser} from "../services/authService";
 import { Link } from "react-router-dom";
 
 
-function LoginPage() {
+function LoginPage({backend}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(""); // State for holding error message
   const navigate = useNavigate();
+  console.log('backend',backend);
 
   useEffect(() => {
       localStorage.removeItem("token");
@@ -19,7 +20,7 @@ function LoginPage() {
 
     if (username && password) {
       try{
-        const data = await loginUser(username, password);
+        const data = await loginUser(username, password, backend);
         localStorage.setItem("token", data.token);
         navigate("/tasks");
       } 

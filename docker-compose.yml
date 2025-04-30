@@ -39,7 +39,8 @@ services:
     depends_on:
       #- keycloak
       - react-service
-      - node-service
+      - node-service1
+      - node-service2
     restart: always
     ports:
       - '8080:80' #http
@@ -51,18 +52,34 @@ services:
       dockerfile: Dockerfile.dev
       context: ./frontend
     volumes:
-      - /app/node_modules
       - ./frontend:/app
+      - /app/node_modules
     depends_on:
       # - keycloak
-      - node-service
-  node-service:
+      - node-service1
+      - node-service2
+  node-service1:
     build:
       dockerfile: Dockerfile.dev
       context: "./backend"
     volumes:
-      - /app/node_modules
       - ./backend:/app #link both directories
+      - /app/node_modules
+      
+    depends_on:
+      - mongo-service
+    environment:
+      - MONGO_USER=mongouser
+      - JWT_SECRET=example
+      - MONGO_URL=mongo-service
+      - MONGO_PASSWORD=mongopassword
+  node-service2:
+    build:
+      dockerfile: Dockerfile.dev
+      context: "./backend"
+    volumes:
+      - ./backend:/app #link both directories
+      - /app/node_modules
     depends_on:
       - mongo-service
     environment:
@@ -81,3 +98,5 @@ services:
 
 # volumes: 
 #   pgdata_keycloak:
+
+#NETWORKS ARE NOT NEEDED AS NGINX IS IN CHARGE OF ROUTING EVERYTHING

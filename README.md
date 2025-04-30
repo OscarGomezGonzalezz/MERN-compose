@@ -11,7 +11,6 @@
   - [TLS/HTTPS To Keycloak](#tlshttps-to-keycloak)
 
 ---
-
 ## Description
 
 TODO List App (MERN) with session management. Built using React for the frontend and Node.js for the backend with MongoDB. This guide covers local development, containerization with Docker, Kubernetes deployment, and HTTPS setup via Keycloak.
@@ -46,6 +45,9 @@ Now, backend is ready for receiving requests from the frontend, so we run it wit
 
 ## Task 2: Migrating to docker-compose, nginx and HTTPS setup##
 
+
+![Kubernetes Ingress Architecture](./assets/Cloud%20arch%20(5)%20(1).jpg)
+
 ### Development
 
 First, we migrate the backend to a docker container:
@@ -74,6 +76,14 @@ It generates a static build of your React app in /build. Then, Nginx serves thos
 5. Now we create the default.conf of nginx, forwarding requests to services, to its inside containers ips and add it too to the docker-compose
 add also mongo-express for visualizaing db: ADMIN; PASS
 
+FOR SEEING APPLIED CHANGES IN NGINX .CONF WE HAVE TO REBUILD
+
+FOR CHECKING IF THE DIFFERENT SERVER MANAGEMENT WORKS WE CAN EXECUTE OPERATIONS SELECTING FOR EXAMPLE BACKEND 1, AND THEN IN DOCKER
+SEE HOW ITS LOGS ARE DIFFERENT FROM THE BACKEND 2
+
+BESIDES, IF WE SELECT THE LOAD BALANCED BACKEND, WE SEE HOW THE DIFFERENT WORKLOAD IS DISTRIBUTED (WITH ROUND ROBIN)
+BETWEEN BOTHS SERVERS
+
 ### Production
 
 6. test it in production env by creating dockerfiles of production and adding other nginx inside frontend
@@ -81,6 +91,24 @@ add also mongo-express for visualizaing db: ADMIN; PASS
 Lets build and push the image of our frontend and backend testing them with:
 - docker buildx build --platform linux/amd64,linux/arm64 -t your-dockerhub-username/your-image-name:tag . --push
 and then docker run
+
+
+## Task 3: Enabling Load Balancing to multiple backend replicas##
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## TLS/HTTPS ##
 ### Certf x.509 for HTTPS
