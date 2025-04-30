@@ -5,6 +5,7 @@
 - [Description](#description)
 - [Task 1: Local development with MongoDB and React](#task-1-local-development-with-mongodb-and-react)
 - [Task 2: Migrating to docker-compose, nginx and HTTPS setup](#task-2-migrating-to-docker-compose-nginx-and-https-setup)
+- [Task 3: Enabling Load Balancing to multiple backend replicas](#task-3-enabling-load-balancing-to-multiple-backend-replicas)
   - [Development](#development)
   - [Production](#production)
   - [Kubernetes](#kubernetes)
