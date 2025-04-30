@@ -89,6 +89,8 @@ and then docker run
 
 ## Task 3: Enabling Load Balancing to multiple backend replicas##
 
+![Kubernetes Ingress Architecture](./assets/Cloud%20arch.jpg)
+
 FOR CHECKING IF THE DIFFERENT SERVER MANAGEMENT WORKS WE CAN EXECUTE OPERATIONS SELECTING FOR EXAMPLE BACKEND 1, AND THEN IN DOCKER
 SEE HOW ITS LOGS ARE DIFFERENT FROM THE BACKEND 2
 
