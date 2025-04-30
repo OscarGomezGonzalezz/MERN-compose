@@ -47,6 +47,7 @@ const tasksCollection = db.collection("tasks");
         description, done: false };
     try { 
     const result = await tasksCollection.insertOne(newTodo);
+    console.log("Task created:", result);
     res.status(201).json(result);
     } catch(e){
         console.log(e)
@@ -65,7 +66,7 @@ const tasksCollection = db.collection("tasks");
       const mongoId = new ObjectId(id);//mongo does not interpret ids like normal strings, but special objetcs
       await tasksCollection.deleteOne({ _id: mongoId, userId: req.user.userId });
       res.json({ message: "Deleted successfully" });
-      console.log("Deleted todo with id:", id);
+      console.log("Deleted task with id:", id);
     } catch (error) {
       res.status(500).json({ error: "Failed to delete todo" });
     }

@@ -49,7 +49,7 @@ services:
   react-service:
     stdin_open: true
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
       context: ./frontend
     volumes:
       - ./frontend:/app
@@ -60,7 +60,7 @@ services:
       - node-service2
   node-service1:
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
       context: "./backend"
     volumes:
       - ./backend:/app #link both directories
@@ -75,7 +75,7 @@ services:
       - MONGO_PASSWORD=mongopassword
   node-service2:
     build:
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
       context: "./backend"
     volumes:
       - ./backend:/app #link both directories
